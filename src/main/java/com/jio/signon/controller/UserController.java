@@ -29,6 +29,6 @@ public class UserController {
     
     @RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ApiResponse<User> createUser(@RequestBody @Valid CreateUserDto createUserDto) throws AppException{
-        return new ApiResponse.Success<>(userSecurityService.createUser(createUserDto));
+        return new ApiResponse.Success<>(userService.createUser(createUserDto));
     }
 }

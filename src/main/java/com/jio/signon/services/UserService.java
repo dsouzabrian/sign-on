@@ -2,6 +2,8 @@ package com.jio.signon.services;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.jio.signon.common.AppException;
@@ -13,13 +15,18 @@ import com.jio.signon.dto.request.user.CreateUserDto;
 public class UserService {
 
 	private final UserRepository userRepository;
+
+    private PasswordEncoder encoder;
 	
-	public UserService(UserRepository userRepository) {
+	public UserService(UserRepository userRepository,PasswordEncoder encoder) {
 		this.userRepository = userRepository;
+        this.encoder = encoder;
 	}
+
     public User createUser(CreateUserDto createUserDto) throws AppException {
         if (!hasUser(createUserDto.getUsername())) {
             User user = new User(createUserDto);
+            user.setPassword(encoder.encode(createUserDto.getPassword()));
             userRepository.save(user);
             return user;
         }

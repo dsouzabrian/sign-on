@@ -40,7 +40,7 @@ public class UserSecurityService implements UserDetailsService{
     public User createUser(CreateUserDto createUserDto) throws AppException {
         if (!hasUser(createUserDto.getUsername())) {
             User user = new User(createUserDto);
-            //user.setActive(true);
+
             userRepository.save(user);
             return user;
         }

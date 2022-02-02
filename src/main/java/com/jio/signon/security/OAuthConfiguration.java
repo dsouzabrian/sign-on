@@ -57,6 +57,13 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.jdbc(dataSource);
+//                .withClient(clientId)
+//                .secret(passwordEncoder.encode(clientSecret))
+//                .accessTokenValiditySeconds(accessTokenValiditySeconds)
+//                .refreshTokenValiditySeconds(refreshTokenValiditySeconds)
+//                .authorizedGrantTypes(authorizedGrantTypes)
+//                .scopes("read", "write")
+//                .resourceIds("api").and().build();
 
     }
 
